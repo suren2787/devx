@@ -1,0 +1,1 @@
+{"root":["./packages/example-plugin/src/index.ts","./packages/example-plugin/src/plugin.ts","./packages/example-plugin/src/routes.ts","./packages/example-plugin/src/components/ExampleComponent/ExampleComponent.tsx","./packages/example-plugin/src/components/ExampleComponent/index.ts"],"version":"5.9.3"}

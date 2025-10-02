@@ -1,0 +1,49 @@
+# Root .gitignore for monorepo
+# Node modules and build outputs
+node_modules/
+dist/
+dist-types/
+
+# Yarn and lock files
+.yarn/
+.pnp.*
+yarn.lock
+
+# Logs
+*.log
+logs/
+
+# Coverage
+coverage/
+
+# IDE/editor files
+.vscode/
+*.swp
+.DS_Store
+
+# Environment and config
+.env*
+*.local.yaml
+*-credentials.yaml
+
+# Cache and temp
+.cache/
+
+# E2E test reports
+e2e-test-report/
+
+# MkDocs build output
+site/
+
+# Ignore all package-level node_modules and build outputs
+packages/*/node_modules/
+packages/*/dist/
+packages/*/dist-types/
+
+# Ignore devx-beta specific files
+/devx-beta/node_modules/
+/devx-beta/dist/
+/devx-beta/dist-types/
+
+# Ignore docs build output
+docs/site/
