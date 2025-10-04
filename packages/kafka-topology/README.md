@@ -50,7 +50,16 @@ To add the Kafka Topology plugin to your Backstage instance, choose one of these
    cp -r packages/kafka-topology /path/to/your-backstage/plugins/
    ```
 
-2. **Add to workspace packages**
+2. **Update plugin package.json**
+   - Ensure the plugin's `package.json` has the correct name:
+     ```json
+     {
+       "name": "@internal/plugin-kafka-topology",
+       "version": "1.0.0"
+     }
+     ```
+
+3. **Add to workspace packages**
    - In your Backstage root `package.json`, add to workspaces:
      ```json
      {
@@ -63,12 +72,22 @@ To add the Kafka Topology plugin to your Backstage instance, choose one of these
      }
      ```
 
-3. **Install dependencies**
+4. **Add plugin dependency to app**
+   - In `packages/app/package.json`, add the plugin as a dependency:
+     ```json
+     {
+       "dependencies": {
+         "@internal/plugin-kafka-topology": "1.0.0"
+       }
+     }
+     ```
+
+5. **Install dependencies**
    ```bash
    yarn install
    ```
 
-4. **Import and register**
+6. **Import and register**
    - In `packages/app/src/App.tsx`:
      ```tsx
      import { KafkaTopologyPage } from '@internal/plugin-kafka-topology';
@@ -86,16 +105,21 @@ To add the Kafka Topology plugin to your Backstage instance, choose one of these
      }
      ```
 
-4. **Build and run Backstage**
-   - Rebuild and start your app:
+7. **Build and run Backstage**
+   - Install dependencies and start your app:
      ```bash
      yarn install
-     yarn build
      yarn dev
      ```
    - Visit `/kafka-topology` in your Backstage app to view the diagram.
+   
+   **Note**: Backstage will automatically build the plugin during development. For production builds, use:
+   ```bash
+   yarn build:backend
+   yarn build:frontend
+   ```
 
-5. **Customization**
+8. **Customization**
    - Update `contractsUrl` for your contracts repo
    - Add a `githubToken` for private repos (optional for public)
    - Style or extend the plugin as needed
