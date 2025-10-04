@@ -15,14 +15,15 @@ A standalone Backstage plugin for visualizing Kafka topic topologies, designed f
 
 ## Integration with Backstage
 
-To add the Kafka Topology plugin to your Backstage instance:
+To add the Kafka Topology plugin to your Backstage instance, choose one of these approaches:
 
-1. **Install the plugin**
-   - Add the package to your Backstage project:
-     ```bash
-     yarn add @your-org/kafka-topology
-     ```
-   - Or copy the `packages/kafka-topology` folder into your Backstage `plugins/` directory.
+### Option 1: Published npm Package (Recommended)
+
+1. **Publish and install the plugin**
+   ```bash
+   # In your Backstage project
+   yarn add @your-org/kafka-topology
+   ```
 
 2. **Configure the contracts source**
    - In your Backstage app's `app-config.yaml`, add:
@@ -37,16 +38,52 @@ To add the Kafka Topology plugin to your Backstage instance:
      ```tsx
      import { KafkaTopologyPage } from '@your-org/kafka-topology';
      
-     // Inside your App component, add the route to your <FlatRoutes>:
-     <FlatRoutes>
-       {/* ...existing routes... */}
-       <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
-     </FlatRoutes>
+     // Inside your routes FlatRoutes component:
+     <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
      ```
-   
-   - Or if using a local copy, import directly:
+
+### Option 2: Local Plugin Development
+
+1. **Copy to Backstage plugins directory**
+   ```bash
+   # Copy the plugin to your Backstage workspace
+   cp -r packages/kafka-topology /path/to/your-backstage/plugins/
+   ```
+
+2. **Add to workspace packages**
+   - In your Backstage root `package.json`, add to workspaces:
+     ```json
+     {
+       "workspaces": {
+         "packages": [
+           "plugins/*",
+           "packages/*"
+         ]
+       }
+     }
+     ```
+
+3. **Install dependencies**
+   ```bash
+   yarn install
+   ```
+
+4. **Import and register**
+   - In `packages/app/src/App.tsx`:
      ```tsx
-     import { KafkaTopologyPage } from '../../../plugins/kafka-topology/src/plugin';
+     import { KafkaTopologyPage } from '@internal/plugin-kafka-topology';
+     
+     // Add route:
+     <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
+     ```
+
+5. **Update plugin package.json**
+   - Ensure the plugin's `package.json` has the correct name:
+     ```json
+     {
+       "name": "@internal/plugin-kafka-topology",
+       "version": "1.0.0"
+     }
      ```
 
 4. **Build and run Backstage**
