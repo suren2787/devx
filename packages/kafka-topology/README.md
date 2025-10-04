@@ -51,11 +51,13 @@ To add the Kafka Topology plugin to your Backstage instance, choose one of these
    ```
 
 2. **Update plugin package.json**
-   - Ensure the plugin's `package.json` has the correct name:
+   - Ensure the plugin's `package.json` has the correct configuration:
      ```json
      {
        "name": "@internal/plugin-kafka-topology",
-       "version": "1.0.0"
+       "version": "1.0.0",
+       "main": "src/index.ts",
+       "types": "src/index.ts"
      }
      ```
 
@@ -77,7 +79,7 @@ To add the Kafka Topology plugin to your Backstage instance, choose one of these
      ```json
      {
        "dependencies": {
-         "@internal/plugin-kafka-topology": "1.0.0"
+         "@internal/plugin-kafka-topology": "workspace:*"
        }
      }
      ```
@@ -92,7 +94,7 @@ To add the Kafka Topology plugin to your Backstage instance, choose one of these
      ```tsx
      import { KafkaTopologyPage } from '@internal/plugin-kafka-topology';
      
-     // Add route:
+     // Add route inside your FlatRoutes component:
      <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
      ```
 
