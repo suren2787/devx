@@ -33,18 +33,20 @@ To add the Kafka Topology plugin to your Backstage instance:
      ```
 
 3. **Register the plugin in Backstage**
-   - Import and add the page to your app's routes:
+   - Import and add the page to your app's routes in `packages/app/src/App.tsx`:
      ```tsx
-     // packages/app/src/plugins.ts
      import { KafkaTopologyPage } from '@your-org/kafka-topology';
-
-     // Add to your routes
-     const routes = (
-       <FlatRoutes>
-         {/* ...existing routes... */}
-         <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
-       </FlatRoutes>
-     );
+     
+     // Inside your App component, add the route to your <FlatRoutes>:
+     <FlatRoutes>
+       {/* ...existing routes... */}
+       <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
+     </FlatRoutes>
+     ```
+   
+   - Or if using a local copy, import directly:
+     ```tsx
+     import { KafkaTopologyPage } from '../../../plugins/kafka-topology/src/plugin';
      ```
 
 4. **Build and run Backstage**
