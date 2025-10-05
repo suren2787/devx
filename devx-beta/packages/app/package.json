@@ -42,6 +42,7 @@
     "@backstage/theme": "^0.6.8",
     "@backstage/ui": "^0.7.1",
     "@internal/plugin-kafka-topology": "workspace:*",
+    "@internal/plugin-sync-status": "workspace:^",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.9.1",
     "react": "^18.0.2",

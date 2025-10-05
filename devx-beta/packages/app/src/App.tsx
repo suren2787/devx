@@ -38,6 +38,7 @@ import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { NotificationsPage } from '@backstage/plugin-notifications';
 import { SignalsDisplay } from '@backstage/plugin-signals';
+import { SyncStatusPage } from '@internal/plugin-sync-status';
 
 const app = createApp({
   apis,
@@ -99,6 +100,7 @@ const routes = (
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/kafka-topology" element={<KafkaTopologyPage />} />
     <Route path="/notifications" element={<NotificationsPage />} />
+    <Route path="/sync-status" element={<SyncStatusPage />} />
   </FlatRoutes>
 );
 
