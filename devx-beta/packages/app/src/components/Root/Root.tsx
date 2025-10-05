@@ -4,6 +4,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
+import SyncIcon from '@material-ui/icons/Sync';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
 import {
@@ -77,6 +78,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
         <SidebarItem icon={ExtensionIcon} to="/kafka-topology" text="Kafka Topology" />
+        <SidebarItem icon={SyncIcon} to="/sync-status" text="Sync Status" />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
