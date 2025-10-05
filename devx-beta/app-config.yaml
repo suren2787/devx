@@ -113,6 +113,15 @@ kafkaTopology:
   githubToken: "${GITHUB_TOKEN}"
   # Optionally, add other config values here for standalone operation
 
+# Central Config Provider Configuration
+centralConfig:
+  # GitHub repository URL containing entity YAML files
+  repoUrl: "https://github.com/suren2787/devx"
+  # GitHub token for authentication (optional for public repos)
+  githubToken: "${GITHUB_TOKEN}"
+  # Refresh interval in minutes (default: 10)
+  refreshInterval: 10
+
 # see https://backstage.io/docs/permissions/getting-started for more on the permission framework
 permission:
   # setting this to `false` will disable permissions

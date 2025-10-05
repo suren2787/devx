@@ -39,6 +39,9 @@ backend.add(import('@backstage/plugin-catalog-backend'));
 // See https://backstage.io/docs/features/software-catalog/configuration#subscribing-to-catalog-errors
 backend.add(import('@backstage/plugin-catalog-backend-module-logs'));
 
+// central config provider plugin
+backend.add(import('@internal/plugin-central-config-provider-backend'));
+
 // permission plugin
 backend.add(import('@backstage/plugin-permission-backend'));
 // See https://backstage.io/docs/permissions/getting-started for how to create your own permission policy
@@ -64,4 +67,5 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
+backend.add(import('@internal/plugin-central-config-provider-backend'));
 backend.start();
