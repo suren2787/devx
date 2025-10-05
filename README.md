@@ -12,24 +12,29 @@ A **complete Backstage development environment** with custom plugins, designed f
 
 ### ✅ Custom Plugin Development
 - **Kafka Topology Plugin** - Visualize Kafka topic relationships
+- **Central Config Provider** - Automatically sync entities from GitHub repositories
+- **Sync Status UI** - Monitor and manage entity synchronization
 - **Modern UI components** with React Flow and professional styling
-- **GitHub integration** for fetching topic contracts
+- **GitHub integration** for fetching topic contracts and config files
 - **Production-ready** and fully documented
 
 ## 🏗 Project Structure
 
 ```
 devx/
-├── devx-beta/                   # Complete Backstage workspace
+├── devx-beta/                                  # Complete Backstage workspace
 │   ├── packages/
-│   │   ├── app/                 # Backstage frontend app
-│   │   └── backend/             # Backstage backend
+│   │   ├── app/                                # Backstage frontend app
+│   │   └── backend/                            # Backstage backend
 │   ├── plugins/
-│   │   └── kafka-topology/      # Custom Kafka topology plugin
-│   ├── app-config.yaml          # Backstage configuration
-│   └── package.json             # Workspace dependencies
-├── docs/                        # Documentation
-└── README.md                    # This file
+│   │   ├── kafka-topology/                     # Kafka topology visualization plugin
+│   │   ├── central-config-provider-backend/    # Entity provider backend plugin
+│   │   └── sync-status/                        # Sync status monitoring UI plugin
+│   ├── app-config.yaml                         # Backstage configuration
+│   └── package.json                            # Workspace dependencies
+├── docs/                                       # Documentation
+├── IMPLEMENTATION_PLAN.md                      # Implementation roadmap
+└── README.md                                   # This file
 ```
 
 ## 🚀 Quick Start
@@ -52,15 +57,33 @@ yarn start
 ### 4. Visit Your Backstage Instance
 - **URL**: http://localhost:3000
 - **Kafka Topology Plugin**: http://localhost:3000/kafka-topology
+- **Sync Status**: http://localhost:3000/sync-status
 
-## 📦 Kafka Topology Plugin Features
+## 📦 Plugin Features
 
+### Kafka Topology Plugin
 - **Multi-context visualization** of Kafka topics and relationships
 - **Partition count badges** on topic nodes
 - **Topic filtering** for finding specific topics quickly
 - **Modern UI** with gradients, shadows, and professional styling
 - **GitHub integration** for loading topic contracts
 - **Three-column layout** (Producers → Topics → Consumers)
+
+### Central Config Provider Plugin (Backend)
+- **Automatic entity synchronization** from GitHub repositories
+- **Configurable refresh interval** (default: 10 minutes)
+- **Fetches and parses YAML files** from repository
+- **Validates entities** before adding to catalog
+- **Error tracking and logging** for sync operations
+- **REST API endpoints** for sync status and manual triggering
+
+### Sync Status Plugin (Frontend)
+- **Real-time sync status display** with visual indicators
+- **Last sync time tracking** with formatted timestamps
+- **Error message display** for failed syncs
+- **Manual sync trigger** button for on-demand updates
+- **Auto-refresh every 30 seconds** for live monitoring
+- **Integrated sidebar navigation** for easy access
 
 ## 🔧 Exporting Plugins to Other Backstage Instances
 
@@ -102,6 +125,33 @@ yarn clean          # Clean build artifacts
 Detailed documentation for each plugin is available in their respective directories:
 
 - **Kafka Topology Plugin**: `devx-beta/plugins/kafka-topology/README.md`
+- **Central Config Provider**: `devx-beta/plugins/central-config-provider-backend/README.md`
+- **Sync Status Plugin**: `devx-beta/plugins/sync-status/README.md`
+
+## ⚙️ Configuration
+
+### Central Config Provider Setup
+
+Add the following to `devx-beta/app-config.yaml`:
+
+```yaml
+centralConfig:
+  # GitHub repository URL containing entity YAML files
+  repoUrl: "https://github.com/your-org/your-config-repo"
+  # GitHub token for authentication (optional for public repos)
+  githubToken: "${GITHUB_TOKEN}"
+  # Refresh interval in minutes (default: 10)
+  refreshInterval: 10
+```
+
+### Environment Variables
+
+Create a `.env` file in the `devx-beta` directory:
+
+```bash
+# GitHub token for accessing repositories
+GITHUB_TOKEN=your_github_token_here
+```
 
 ## 🎯 Benefits of This Approach
 
