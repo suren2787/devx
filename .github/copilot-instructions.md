@@ -1,56 +1,96 @@
-# Backstage Custom Plugins Development
+# Backstage DevX Workspace
 
 ## Project Overview
-This workspace is for developing **standalone Backstage plugins** without forking the massive Backstage repository.
+This is a **complete Backstage development workspace** with integrated custom plugins, designed for plugin development, testing, and easy export to other Backstage instances.
 
 ## Why This Approach?
-- **Lightweight**: No massive repo clone (~1GB+)
-- **GitHub-friendly**: Fits in free GitHub accounts
-- **Plugin-focused**: Only what you need for custom plugins
-- **Portable**: Plugins can be published to npm and used in any Backstage instance
+- **Complete Environment**: Full Backstage instance for immediate testing
+- **Integrated Development**: Develop and test plugins in real Backstage environment
+- **Easy Export**: Copy or publish plugins to any other Backstage instance
+- **Production Ready**: Uses official Backstage CLI and best practices
+- **GitHub-friendly**: Clean, organized structure
 
 ## Architecture
 ```
-backstage-plugins/
-├── packages/
-│   ├── my-custom-plugin/           # Frontend plugin
-│   ├── my-custom-plugin-backend/   # Backend plugin
-│   └── my-custom-plugin-common/    # Shared types/utils
-├── example-app/                    # Minimal Backstage app for testing
-└── docs/                          # Plugin documentation
+devx/
+├── devx-beta/                      # Complete Backstage workspace
+│   ├── packages/
+│   │   ├── app/                    # Backstage frontend application
+│   │   └── backend/                # Backstage backend services
+│   ├── plugins/
+│   │   └── kafka-topology/         # Custom Kafka topology plugin
+│   ├── app-config.yaml             # Backstage configuration
+│   └── package.json                # Workspace dependencies
+├── docs/                           # Project documentation
+└── README.md                       # Project overview
 ```
 
 ## Development Workflow
-1. Develop plugins in `packages/`
-2. Test with minimal Backstage app in `example-app/`
-3. Publish plugins to npm
-4. Use in production Backstage instances
+1. **Develop plugins** in `devx-beta/plugins/`
+2. **Test immediately** in the integrated Backstage app
+3. **Export easily** by copying plugin directories
+4. **Publish to npm** for wider distribution
 
-## Setup Checklist
-- [x] Create project structure
-- [x] Set up TypeScript configuration
-- [x] Create example plugin templates
-- [x] Install dependencies and build system
-- [x] Configure debugging and testing
-- [ ] Create CI/CD pipeline
+## Current Plugins
 
-## Final Status
-✅ **Lightweight Backstage plugin development workspace ready!**
+### Kafka Topology Plugin (`devx-beta/plugins/kafka-topology/`)
+- **Visualizes Kafka topic relationships** across bounded contexts
+- **Modern UI** with React Flow, gradients, and professional styling
+- **Topic filtering** for finding specific topics quickly
+- **Partition count badges** on topic nodes
+- **GitHub integration** for loading topic contracts
+- **Three-column layout** (Producers → Topics → Consumers)
+- **Production ready** with comprehensive documentation
 
-**Size comparison:**
-- Full Backstage fork: ~1GB+ 
-- Standard approach: ~400MB
-- **Our approach: ~380MB** (includes all dev tools)
+## Key Commands
+```bash
+# Navigate to workspace
+cd devx-beta
 
-The workspace is now ready for custom Backstage plugin development with:
-- Minimal dependency footprint
-- Fast builds and installs  
-- GitHub-friendly size
-- Production-ready output
+# Start development server
+yarn start                 # Backstage at http://localhost:3000
 
-## Plugin Development Guidelines
-- Use TypeScript for all development
-- Follow Backstage plugin patterns
-- Include comprehensive tests
-- Document APIs and usage
-- Version plugins independently
+# Plugin development
+yarn build                 # Build all packages
+yarn test                  # Run tests
+yarn lint                  # Lint code
+
+# Plugin-specific (in devx-beta/plugins/kafka-topology/)
+yarn dev                   # Plugin development mode
+yarn build                 # Build plugin for export
+```
+
+## Plugin Export Process
+
+### To Other Backstage Instances:
+1. **Copy plugin directory**: `cp -r devx-beta/plugins/kafka-topology /target/plugins/`
+2. **Add workspace dependency**: Update target's package.json
+3. **Import in App.tsx**: Add route and components
+4. **Install dependencies**: `yarn install`
+
+### To npm Registry:
+1. **Build plugin**: `cd devx-beta/plugins/kafka-topology && yarn build`
+2. **Publish**: `npm publish`
+3. **Install elsewhere**: `yarn add @your-org/plugin-kafka-topology`
+
+## Setup Status
+✅ **Complete Backstage workspace ready for development!**
+
+- [x] Full Backstage instance (devx-beta/)
+- [x] Kafka topology plugin integrated
+- [x] Modern UI with React Flow visualization
+- [x] GitHub integration for topic contracts
+- [x] Topic filtering and partition badges
+- [x] Professional styling and responsive design
+- [x] Comprehensive documentation
+- [x] Export-ready plugin structure
+- [x] Production-ready configuration
+
+## Development Guidelines
+- **Work in devx-beta/ directory** for all development
+- **Test plugins immediately** in the integrated Backstage app
+- **Follow Backstage CLI patterns** for builds and development
+- **Use TypeScript** for all plugin development
+- **Include comprehensive documentation** for each plugin
+- **Maintain export compatibility** for easy distribution
+- **Test integration** before export to ensure compatibility

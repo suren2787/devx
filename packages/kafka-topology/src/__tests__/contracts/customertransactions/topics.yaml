@@ -1,6 +1,0 @@
-- name: transaction-posted
-  producers:
-    - TransactionService
-  consumers:
-    - LedgerService
-    - NotificationService

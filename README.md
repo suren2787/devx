@@ -1,167 +1,118 @@
-# Backstage Custom Plugins Workspace
+# Backstage DevX Workspace
 
-A **truly lightweight** development environment for creating custom Backstage plugins without the massive dependency overhead.
+A **complete Backstage development environment** with custom plugins, designed for easy plugin development and export.
 
-## 🎯 The Problem with Standard Approaches
+## 🎯 What This Workspace Provides
 
-### ❌ Full Backstage Fork
-- **1GB+ repository size** 
-- **GitHub storage limits** exceeded on free accounts
-- **90% irrelevant code** for plugin development
-- **Complex upstream syncing**
+### ✅ Complete Backstage Instance (devx-beta/)
+- **Full working Backstage application** for testing plugins
+- **Production-ready environment** with all standard Backstage features
+- **Integrated custom plugins** for development and testing
+- **Easy export** to other Backstage instances
 
-### ❌ Standard Plugin Templates  
-- **400MB+ dependencies** even for simple plugins
-- **Hundreds of transitive dependencies**
-- **Slow install times**
-- **Still too heavy for simple development**
-
-### ✅ Our Lightweight Solution
-- **~50MB total** for complete development setup
-- **Minimal dependencies** - only what you actually need
-- **Fast installs** and builds
-- **GitHub-friendly** fits easily in free accounts
-- **Production-ready** plugins that work anywhere
+### ✅ Custom Plugin Development
+- **Kafka Topology Plugin** - Visualize Kafka topic relationships
+- **Modern UI components** with React Flow and professional styling
+- **GitHub integration** for fetching topic contracts
+- **Production-ready** and fully documented
 
 ## 🏗 Project Structure
 
 ```
-backstage-plugins/
-├── packages/
-│   ├── example-plugin/          # Your plugin code
-│   │   ├── src/
-│   │   │   ├── components/      # React components
-│   │   │   ├── plugin.ts        # Plugin definition
-│   │   │   └── index.ts         # Exports
-│   │   ├── package.json
-│   │   └── tsconfig.json
-│   └── [your-next-plugin]/
+devx/
+├── devx-beta/                   # Complete Backstage workspace
+│   ├── packages/
+│   │   ├── app/                 # Backstage frontend app
+│   │   └── backend/             # Backstage backend
+│   ├── plugins/
+│   │   └── kafka-topology/      # Custom Kafka topology plugin
+│   ├── app-config.yaml          # Backstage configuration
+│   └── package.json             # Workspace dependencies
 ├── docs/                        # Documentation
-├── scripts/                     # Development utilities
-└── README.md
+└── README.md                    # This file
 ```
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies (Minimal!)
+### 1. Navigate to Backstage Workspace
+```bash
+cd devx-beta
+```
+
+### 2. Install Dependencies
 ```bash
 yarn install
-# Only ~50MB vs 1GB+ for full Backstage
 ```
 
-### 2. Build Your Plugin
+### 3. Start Development Server
 ```bash
-cd packages/example-plugin
+yarn start
+```
+
+### 4. Visit Your Backstage Instance
+- **URL**: http://localhost:3000
+- **Kafka Topology Plugin**: http://localhost:3000/kafka-topology
+
+## 📦 Kafka Topology Plugin Features
+
+- **Multi-context visualization** of Kafka topics and relationships
+- **Partition count badges** on topic nodes
+- **Topic filtering** for finding specific topics quickly
+- **Modern UI** with gradients, shadows, and professional styling
+- **GitHub integration** for loading topic contracts
+- **Three-column layout** (Producers → Topics → Consumers)
+
+## 🔧 Exporting Plugins to Other Backstage Instances
+
+### Option 1: Copy Plugin Directory
+```bash
+# Copy the plugin to target Backstage workspace
+cp -r devx-beta/plugins/kafka-topology /path/to/target-backstage/plugins/
+
+# Follow integration steps in the plugin's README
+```
+
+### Option 2: Publish to npm
+```bash
+cd devx-beta/plugins/kafka-topology
 yarn build
-```
-
-### 3. Test Locally
-```bash
-# Link to existing Backstage app for testing
-cd /path/to/existing/backstage/app
-yarn add file:../path/to/your/plugin
-```
-
-### 4. Publish to npm
-```bash
 npm publish
 ```
 
-## 📦 Using Your Plugin in Any Backstage App
+## 💡 Development Workflow
 
-Once published, any Backstage instance can use your plugin:
-
-### Install
-```bash
-yarn add @yourorg/backstage-plugin-name
-```
-
-### Configure
-```typescript
-// packages/app/src/App.tsx
-import { ExamplePage } from '@yourorg/backstage-plugin-name';
-
-const routes = (
-  <FlatRoutes>
-    <Route path="/your-plugin" element={<ExamplePage />} />
-  </FlatRoutes>
-);
-```
-
-### Add to Sidebar
-```typescript
-// packages/app/src/components/Root/Root.tsx
-import { yourPluginRef } from '@yourorg/backstage-plugin-name';
-
-<SidebarItem icon={ExtensionIcon} to="your-plugin" text="Your Plugin" />
-```
-
-## 💡 Development Philosophy
-
-**"Build plugins, not platforms"**
-
-- **Focus on your plugin logic**, not Backstage infrastructure
-- **Minimal footprint** during development
-- **Maximum compatibility** when deployed
-- **Easy sharing** via npm
+1. **Develop plugins** in `devx-beta/plugins/`
+2. **Test immediately** in the integrated Backstage app
+3. **Export easily** to other Backstage instances
+4. **Publish to npm** for wider distribution
 
 ## 🔧 Available Commands
 
 ```bash
-yarn build          # Build all plugins
+# In devx-beta/ directory:
+yarn start          # Start Backstage development server
+yarn build:all      # Build all packages
 yarn test           # Run tests
 yarn lint           # Lint code
 yarn clean          # Clean build artifacts
 ```
 
-## � Creating New Plugins
+## 📚 Plugin Documentation
 
-1. **Copy the example plugin**:
-   ```bash
-   cp -r packages/example-plugin packages/my-new-plugin
-   ```
+Detailed documentation for each plugin is available in their respective directories:
 
-2. **Update package.json**:
-   ```json
-   {
-     "name": "@yourorg/backstage-plugin-my-new-plugin",
-     "version": "0.1.0"
-   }
-   ```
+- **Kafka Topology Plugin**: `devx-beta/plugins/kafka-topology/README.md`
 
-3. **Develop your plugin**:
-   - Edit `src/components/` for UI
-   - Update `src/plugin.ts` for plugin config
-   - Build and test
+## 🎯 Benefits of This Approach
 
-4. **Publish**:
-   ```bash
-   npm publish
-   ```
-
-## 🎯 Benefits Summary
-
-| Aspect | Full Fork | Standard Template | **Our Approach** |
-|--------|-----------|-------------------|-------------------|
-| Size | 1GB+ | 400MB+ | **~50MB** |
-| Install Time | 5-10 min | 2-3 min | **30 sec** |
-| GitHub Friendly | ❌ | ⚠️ | **✅** |
-| Development Speed | Slow | Medium | **Fast** |
-| Deployment | Complex | Medium | **Simple** |
-
-## 🤝 Contributing
-
-1. Create your plugin in `packages/`
-2. Test thoroughly
-3. Add documentation
-4. Submit PR
-
-## 📚 Resources
-
-- [Backstage Plugin Development](https://backstage.io/docs/plugins/)
-- [Plugin Architecture](https://backstage.io/docs/plugins/plugin-development)
-- [Publishing Plugins](https://backstage.io/docs/plugins/publishing)
+| Aspect | Benefit |
+|--------|---------|
+| **Integrated Testing** | Test plugins immediately in real Backstage environment |
+| **Easy Export** | Copy or publish plugins to any Backstage instance |
+| **Production Ready** | Uses official Backstage CLI and best practices |
+| **Complete Environment** | Full Backstage features available for development |
+| **Documentation** | Comprehensive guides for integration and usage |
 
 ---
 
-**💡 Pro Tip**: This approach lets you build production-ready plugins in minutes, not hours!
+**🎉 Ready for custom Backstage plugin development and deployment!**

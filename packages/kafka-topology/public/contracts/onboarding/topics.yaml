@@ -1,7 +1,0 @@
-- name: customer-onboarded
-  partitions: 5
-  producers:
-    - OnboardingService
-  consumers:
-    - NotificationService
-    - IAMService

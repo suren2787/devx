@@ -1,6 +1,0 @@
-- name: deposit-created
-  producers:
-    - DepositService
-  consumers:
-    - LedgerService
-    - NotificationService
